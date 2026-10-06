@@ -1,0 +1,762 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Typing Indonesia - Belajar Mengetik Biar Kau kencang Tpyping </title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top left, #263b70 0%, transparent 35%),
+        radial-gradient(circle at bottom right, #531c68 0%, transparent 35%),
+        #080b16;
+    color: white;
+    padding: 30px 15px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* HEADER */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    display: inline-block;
+    padding: 8px 18px;
+    border: 1px solid rgba(11, 100, 233, 0.15);
+    border-radius: 50px;
+    background: rgba(245, 5, 5, 0.06);
+    color: #8ee7ff;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: clamp(32px, 6vw, 58px);
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #ffffff, #72e5ff, #c77dff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.subtitle {
+    color: #aeb7d0;
+    font-size: 16px;
+}
+
+/* CARD */
+.card {
+    background: rgba(17, 22, 40, .78);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 25px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.3);
+    backdrop-filter: blur(15px);
+}
+
+/* STATS */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.stat {
+    background: rgba(255,255,255,.05);
+    border-radius: 18px;
+    padding: 18px;
+    text-align: center;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #8f99b5;
+    margin-bottom: 7px;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* PROGRESS */
+.progress-container {
+    height: 8px;
+    background: #1d243b;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.progress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #4ee7ff, #a76cff);
+    transition: width .2s;
+}
+
+/* TEXT */
+.text-box {
+    font-size: 22px;
+    line-height: 1.8;
+    background: #0b0f1d;
+    padding: 25px;
+    border-radius: 18px;
+    min-height: 160px;
+    margin-bottom: 20px;
+    border: 1px solid #202942;
+}
+
+.char {
+    color: #64708d;
+}
+
+.char.correct {
+    color: #55e6a5;
+}
+
+.char.incorrect {
+    color: #ff617d;
+    text-decoration: underline;
+}
+
+.char.current {
+    background: rgba(100,220,255,.25);
+    border-bottom: 2px solid #65ddff;
+}
+
+/* INPUT */
+textarea {
+    width: 100%;
+    height: 150px;
+    resize: none;
+    border: none;
+    outline: none;
+    background: #11172a;
+    border: 1px solid #283452;
+    border-radius: 18px;
+    padding: 20px;
+    color: white;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+textarea:focus {
+    border-color: #5de2ff;
+    box-shadow: 0 0 0 3px rgba(93,226,255,.08);
+}
+
+/* BUTTONS */
+.buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    padding: 13px 22px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    background: #242d48;
+    transition: .2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    background: #33405f;
+}
+
+.primary {
+    background: linear-gradient(135deg, #36cfff, #8b5cff);
+}
+
+.primary:hover {
+    background: linear-gradient(135deg, #55d8ff, #a173ff);
+}
+
+/* LEVEL */
+.levels {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.level.active {
+    background: linear-gradient(135deg, #36cfff, #8b5cff);
+}
+
+/* RESULT */
+.result {
+    display: none;
+    text-align: center;
+}
+
+.result h2 {
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.result-number {
+    font-size: 55px;
+    font-weight: bold;
+    color: #67e8ff;
+    margin-bottom: 10px;
+}
+
+.message {
+    color: #adb6cf;
+    margin-bottom: 20px;
+}
+
+/* TIPS */
+.tips {
+    color: #aab4cc;
+    line-height: 1.8;
+}
+
+.tips strong {
+    color: white;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    color: #69738e;
+    margin-top: 25px;
+    font-size: 13px;
+}
+
+/* RESPONSIVE */
+@media(max-width: 700px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .text-box {
+        font-size: 18px;
+    }
+
+    textarea {
+        font-size: 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+    <div class="logo">🇮🇩 TYPING KAU BODAT</div>
+
+    <h1>Belajar Mengetik</h1>
+
+    <p class="subtitle">
+        Latih kecepatan dan biar angkat live chat cepat tol.
+    </p>
+</header>
+
+<!-- STATS -->
+<div class="stats">
+
+    <div class="stat">
+        <div class="stat-label">WAKTU</div>
+        <div class="stat-value" id="timer">60</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-label">WPM</div>
+        <div class="stat-value" id="wpm">0</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-label">AKURASI</div>
+        <div class="stat-value" id="accuracy">100%</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-label">KESALAHAN</div>
+        <div class="stat-value" id="errors">0</div>
+    </div>
+
+</div>
+
+<div class="card">
+
+    <!-- LEVEL -->
+    <h3 style="margin-bottom:15px;">Pilih Level</h3>
+
+    <div class="levels">
+
+        <button class="level active" onclick="changeLevel(0,this)">
+            Pemula
+        </button>
+
+        <button class="level" onclick="changeLevel(1,this)">
+            Menengah
+        </button>
+
+        <button class="level" onclick="changeLevel(2,this)">
+            Mahir
+        </button>
+
+    </div>
+
+</div>
+
+<div class="card">
+
+    <!-- PROGRESS -->
+    <div class="progress-container">
+        <div class="progress" id="progress"></div>
+    </div>
+
+    <!-- TEXT -->
+    <div class="text-box" id="textDisplay"></div>
+
+    <!-- INPUT -->
+    <textarea
+        id="input"
+        placeholder="Mulai mengetik teks di atas..."
+        spellcheck="false">
+    </textarea>
+
+    <div class="buttons">
+
+        <button class="primary" onclick="restart()">
+            🔄 Mulai Ulang
+        </button>
+
+        <button onclick="newText()">
+            📝 Teks Baru
+        </button>
+
+    </div>
+
+</div>
+
+<!-- RESULT -->
+<div class="card result" id="result">
+
+    <h2>🎉 Latihan Selesai!</h2>
+
+    <div class="result-number" id="finalWpm">
+        0 WPM
+    </div>
+
+    <div class="message" id="finalMessage"></div>
+
+    <button class="primary" onclick="restart()">
+        Coba Lagi
+    </button>
+
+</div>
+
+<!-- TIPS -->
+<div class="card">
+
+    <h3 style="margin-bottom:15px;">
+        💡 Tips Mengetik Lebih Cepat
+    </h3>
+
+    <div class="tips">
+
+        <p>
+            <strong>1. Jangan melihat keyboard.</strong><br>
+            Biasakan jari menghafal posisi setiap tombol.
+        </p>
+
+        <p>
+            <strong>2. Utamakan akurasi.</strong><br>
+            Kecepatan akan meningkat dengan sendirinya.
+        </p>
+
+        <p>
+            <strong>3. Gunakan semua jari.</strong><br>
+            Jangan hanya mengetik menggunakan dua jari.
+        </p>
+
+        <p>
+            <strong>4. Latihan setiap hari.</strong><br>
+            Cukup 10–15 menit setiap hari untuk melihat perkembangan.
+        </p>
+
+    </div>
+
+</div>
+
+<footer>
+    Typing Indonesia • Latihan mengetik bahasa Indonesia 🇮🇩
+</footer>
+
+</div>
+
+<script>
+
+const texts = {
+
+    pemula: [
+        "Saya sedang belajar mengetik dengan lebih cepat dan tepat.",
+        "Indonesia adalah negara yang indah dengan banyak budaya.",
+        "Belajar sedikit demi sedikit akan membuat kemampuan kita meningkat.",
+        "Hari ini saya ingin menjadi lebih baik daripada kemarin."
+    ],
+
+    menengah: [
+        "Teknologi berkembang sangat cepat dan membuat banyak pekerjaan menjadi lebih mudah.",
+        "Kemampuan mengetik dengan cepat dapat membantu kita menyelesaikan pekerjaan dalam waktu yang lebih singkat.",
+        "Membaca buku dan berlatih setiap hari dapat meningkatkan pengetahuan serta kemampuan berpikir.",
+        "Disiplin dan konsisten merupakan kunci penting untuk mencapai tujuan yang kita inginkan."
+    ],
+
+    mahir: [
+        "Perkembangan teknologi digital memberikan banyak peluang bagi seseorang untuk belajar, bekerja, dan membangun bisnis dari mana saja.",
+        "Keberhasilan tidak selalu datang dari kemampuan yang sempurna, tetapi dari keberanian untuk terus mencoba ketika mengalami kegagalan.",
+        "Dalam dunia yang terus berubah, kemampuan beradaptasi menjadi salah satu keterampilan penting yang harus dimiliki oleh setiap orang.",
+        "Membangun kebiasaan yang baik membutuhkan waktu, kesabaran, dan konsistensi, tetapi hasilnya akan sangat berarti dalam jangka panjang."
+    ]
+
+};
+
+let currentLevel = "pemula";
+let currentText = "";
+let startTime = null;
+let timerInterval = null;
+let timeLeft = 60;
+let started = false;
+let finished = false;
+
+const textDisplay = document.getElementById("textDisplay");
+const input = document.getElementById("input");
+const timer = document.getElementById("timer");
+const wpm = document.getElementById("wpm");
+const accuracy = document.getElementById("accuracy");
+const errors = document.getElementById("errors");
+const progress = document.getElementById("progress");
+const result = document.getElementById("result");
+const finalWpm = document.getElementById("finalWpm");
+const finalMessage = document.getElementById("finalMessage");
+
+
+function randomText() {
+
+    const list = texts[currentLevel];
+
+    return list[Math.floor(Math.random() * list.length)];
+
+}
+
+
+function displayText() {
+
+    currentText = randomText();
+
+    textDisplay.innerHTML = "";
+
+    currentText.split("").forEach((char, index) => {
+
+        const span = document.createElement("span");
+
+        span.textContent = char;
+
+        span.classList.add("char");
+
+        if (index === 0) {
+            span.classList.add("current");
+        }
+
+        textDisplay.appendChild(span);
+
+    });
+
+}
+
+
+function changeLevel(level, button) {
+
+    const names = [
+        "pemula",
+        "menengah",
+        "mahir"
+    ];
+
+    currentLevel = names[level];
+
+    document.querySelectorAll(".level").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    restart();
+
+}
+
+
+function startTimer() {
+
+    if (started) return;
+
+    started = true;
+
+    startTime = Date.now();
+
+    timerInterval = setInterval(() => {
+
+        timeLeft--;
+
+        timer.textContent = timeLeft;
+
+        updateStats();
+
+        if (timeLeft <= 0) {
+
+            finish();
+
+        }
+
+    }, 1000);
+
+}
+
+
+function updateDisplay() {
+
+    const typed = input.value;
+
+    const spans = textDisplay.querySelectorAll(".char");
+
+    let errorCount = 0;
+
+    spans.forEach((span, index) => {
+
+        span.classList.remove(
+            "correct",
+            "incorrect",
+            "current"
+        );
+
+        if (index < typed.length) {
+
+            if (typed[index] === currentText[index]) {
+
+                span.classList.add("correct");
+
+            } else {
+
+                span.classList.add("incorrect");
+
+                errorCount++;
+
+            }
+
+        }
+
+        if (index === typed.length) {
+
+            span.classList.add("current");
+
+        }
+
+    });
+
+    errors.textContent = errorCount;
+
+    const percentage =
+        currentText.length > 0
+        ? Math.min(
+            100,
+            (typed.length / currentText.length) * 100
+        )
+        : 0;
+
+    progress.style.width = percentage + "%";
+
+    updateStats();
+
+}
+
+
+function updateStats() {
+
+    const typed = input.value;
+
+    if (!started) {
+
+        wpm.textContent = "0";
+        accuracy.textContent = "100%";
+
+        return;
+
+    }
+
+    const elapsed =
+        Math.max(
+            1,
+            (Date.now() - startTime) / 60000
+        );
+
+    const words =
+        typed.trim().length / 5;
+
+    const currentWpm =
+        Math.round(words / elapsed);
+
+    wpm.textContent =
+        currentWpm > 0 ? currentWpm : 0;
+
+    let correct = 0;
+
+    for (let i = 0; i < typed.length; i++) {
+
+        if (typed[i] === currentText[i]) {
+
+            correct++;
+
+        }
+
+    }
+
+    const acc =
+        typed.length > 0
+        ? Math.round((correct / typed.length) * 100)
+        : 100;
+
+    accuracy.textContent = acc + "%";
+
+}
+
+
+function finish() {
+
+    if (finished) return;
+
+    finished = true;
+
+    clearInterval(timerInterval);
+
+    input.disabled = true;
+
+    updateStats();
+
+    finalWpm.textContent =
+        wpm.textContent + " WPM";
+
+    const speed = parseInt(wpm.textContent);
+
+    if (speed >= 60) {
+
+        finalMessage.textContent =
+            "🔥 Luar biasa! Kecepatan mengetik kamu sangat bagus.";
+
+    } else if (speed >= 40) {
+
+        finalMessage.textContent =
+            "👏 Bagus! Terus latihan untuk meningkatkan kecepatan.";
+
+    } else if (speed >= 25) {
+
+        finalMessage.textContent =
+            "👍 Lumayan! Konsisten latihan dan kamu akan semakin cepat.";
+
+    } else {
+
+        finalMessage.textContent =
+            "💪 Jangan menyerah! Fokus pada akurasi terlebih dahulu.";
+
+    }
+
+    result.style.display = "block";
+
+}
+
+
+function restart() {
+
+    clearInterval(timerInterval);
+
+    timeLeft = 60;
+
+    started = false;
+
+    finished = false;
+
+    timer.textContent = "60";
+
+    wpm.textContent = "0";
+
+    accuracy.textContent = "100%";
+
+    errors.textContent = "0";
+
+    progress.style.width = "0%";
+
+    input.value = "";
+
+    input.disabled = false;
+
+    result.style.display = "none";
+
+    displayText();
+
+    input.focus();
+
+}
+
+
+function newText() {
+
+    restart();
+
+}
+
+
+input.addEventListener("input", () => {
+
+    if (finished) return;
+
+    startTimer();
+
+    updateDisplay();
+
+    if (input.value.length >= currentText.length) {
+
+        finish();
+
+    }
+
+});
+
+
+displayText();
+
+</script>
+
+</body>
+</html>
+```
